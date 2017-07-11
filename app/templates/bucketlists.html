@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css')}} ">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css')}} ">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+</head>
+<body>
+<div class="body">
+    <ul class="navigation">
+        <li style="float:left; border-right: 1px solid white;"><a href="#">Logout</a></li>
+        <li><a href="#">Achievements</a></li>
+        <li><a href="#">Home</a></li>
+    </ul>
+    <div class="row bucketlistarea">
+
+        <div class="col-md-4">
+            <div class="bucklists">
+                <h2>Bucket Lists</h2>
+                <ul>
+                    <li><a href="#">BucketList 1</a></li>
+                    <li><a href="#">BucketList 2</a></li>
+                    <li><a href="#">BucketList 3</a></li>
+                    <li><a href="#">BucketList 4</a></li>
+                    <li><a href="#">BucketList 5</a></li>
+                    <li><a href="#">BucketList 6</a></li>
+                    <li><a href="#">BucketList 7</a></li>
+                    <li><a href="#">BucketList 8</a></li>
+                </ul>
+                <button type="submit" class="btn btn-sm btn-primary">Add Bucketlist</i></button>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h2>Items</h2>
+            <div class="items">
+                <button type="submit" class="btn btn-default btn-primary" id="additembtn"><i class="glyphicon glyphicon-plus"></i></button>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Title</th>
+                        <th>Due date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Checkbox</td>
+                        <td><a href="#">Scooba diving</a></td>
+                        <td>13th Nov 2018</td>
+                        <td>
+                            <form method="POST" action="">
+                                <input type="hidden" name="lab" value="">
+                                <button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-pencil"></i></button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="" onsubmit="return confirm('Are you sure you want to delete?')">
+                                <input type="hidden" name="lab" value="">
+                                <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                            </form></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
