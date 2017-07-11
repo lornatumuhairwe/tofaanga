@@ -88,7 +88,8 @@
 }
 
 .bucklists{
-    width: 30%;
+    /*width: 30%;*/
+    margin-left: 10px;
 }
 
 .bucklists ul{
@@ -108,4 +109,16 @@
     text-align: center;
     padding: 14px 40px;
     text-decoration: None;
+}
+
+
+
+.bucklists button{
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
+#additembtn{
+    float: right;
+    margin-right: 10px;
 }
