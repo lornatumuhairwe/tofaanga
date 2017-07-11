@@ -51,3 +51,74 @@
     background-color: #1b6d85;
     color: white;
 }
+
+.signinbox input {
+    margin: 10px;
+    border: 1px solid #1b6d85;
+    padding: 12px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.signinbox input[type="submit"]{
+    width: 100%;
+    background-color: #1b6d85;
+    color: white;
+}
+
+.navigation{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #1b6d85;
+}
+
+.navigation li{
+    float: right;
+    border-left: 1px solid white;
+}
+
+.navigation li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 40px;
+    text-decoration: None;
+}
+
+.bucklists{
+    /*width: 30%;*/
+    margin-left: 10px;
+}
+
+.bucklists ul{
+    list-style-type: none;
+    background-color: #d1ded6;
+    margin: 0;
+    padding: 0;
+}
+
+.bucklists li{
+    border-bottom: 1px solid white;
+}
+
+.bucklists li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 40px;
+    text-decoration: None;
+}
+
+
+
+.bucklists button{
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
+#additembtn{
+    float: right;
+    margin-right: 10px;
+}
