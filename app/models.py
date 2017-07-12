@@ -1,4 +1,4 @@
-users = {'xr': ['X', '1992', 'asd']}
+users = {'xr': ['X', '1920', 'asd']}
 logged_in = []
 
 class BucketListApp(object):
@@ -13,18 +13,26 @@ class BucketListApp(object):
         #self.logged_in = []
 
     def signup(self):
-        if self.password == self.cpassword:
-            users[self.email] = [self.name, self.dob, self.password]
-            return users
+        if self.email and self.password:
+            if self.email in users:
+                return 'User already exists'
+            else:
+                if self.password == self.cpassword:
+                    users[self.email] = [self.name, self.dob, self.password]
+                    return users
+                else:
+                    return 'password mismatch'
         else:
-            return 'password mismatch'
+            return 'No user name given'
 
     def login(self):
         if self.email in users:
             if self.password == users[self.email][2]:
                 logged_in.append(self.email)
-                print (logged_in)
+                #print (logged_in)
                 return 'Logged in'
+            else:
+                return 'Incorrect password'
         else:
             return 'Unknown user'
 
