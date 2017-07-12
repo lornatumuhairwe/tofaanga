@@ -1,5 +1,5 @@
 users = {'xr': ['X', '1920', 'asd']}
-logged_in = []
+logged_in = [None]
 
 class BucketListApp(object):
     def __init__(self, email, password, name=None, dob=None, cpassword=None):
@@ -28,7 +28,7 @@ class BucketListApp(object):
     def login(self):
         if self.email in users:
             if self.password == users[self.email][2]:
-                logged_in.append(self.email)
+                logged_in[0] = self.email
                 #print (logged_in)
                 return 'Logged in'
             else:
