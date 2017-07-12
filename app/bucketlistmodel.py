@@ -1,23 +1,27 @@
-bucketlists = {'ltumuhairwe@outlook.com': {'Travel to Kampala': ['Sit on Naguru Hill', 'Visit the Kasubi tombs'],
-                                           'Travel to Mbarara': ['Long horns', 'Visit the River']}}
+bucketlists = {}
 
-class BucketList(object):
+class User(object):
 
-    def __init__(self, owner, name, items=None):
-        self.name = name
-        self.owner = owner
-        self.items = items
-        #self.bucketlists = {}
+    def __init__(self, email):#email belongs to the logged in user
+        self.email = email
 
-    def create_bucketlist(self):
-        bucketlists[self.owner] = {}#first create the owners keys in the bucketlist dict
-        bucketlists[self.owner][self.name] =  []#create bucketlist as an inner dictionary
+    def create_user_bucketlist(self, name):
+        if self.email in bucketlists:
+            bucketlists[self.email][name] = {}
+        else:
+            bucketlists[self.email] = {}
+            bucketlists[self.email][name] = {}
         return bucketlists
 
-    def view_bucketlist(self, owner):
-        if owner in bucketlists:
-            for bucketlist, items in bucketlists[owner].items():
-                return (bucketlist, items)
+    def view_user_bucketlist(self, email):
+        user_bucketlists = []
+        if email in bucketlists:
+            for bucketlist in bucketlists[email]:
+                user_bucketlists.append(bucketlist)
+            return user_bucketlists
+        else:
+            bucketlists[email] = {}
+            return user_bucketlists
 
     def update_bucketlist(self, name):
         pass
@@ -25,12 +29,19 @@ class BucketList(object):
     def delete_bucketlist(self):
         pass
 
+    def add_item_to_bucketlist(self, bucketlist, item):
+        if bucketlist in self.bucketlists:
+            self.bucketlists[bucketlist].append(item)
+            return self.bucketlists
+        else:
+            self.bucketlists[bucketlist] = []
+            self.bucketlists[bucketlist].append(item)
+            return self.bucketlists
+
 if __name__ == "__main__":
-    # name1 = input('Name: ')
-    ownerr = input('Owner: ')
-    # dob1 = input('DOB: ')
-    name = input('Bucklist name: ')
-    # cpassword1 = input('cPassword: ')
-    appp = BucketList(ownerr, name)
-    print (appp.create_bucketlist())
-    print (appp.view_bucketlist(ownerr))
+    name1 = input('Name: ')
+    bucketlist = input('Add bucketlist to account: ')
+    appp = User(name1)
+    print (appp.create_bucketlist(bucketlist))
+    print (appp.add_item_to_bucketlist('mk', ['Drive to Kampala', 1995, 'Not Done']))
+    #print (appp.view_bucketlist(ownerr))
