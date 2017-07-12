@@ -75,8 +75,8 @@
 }
 
 .navigation li{
-    float: right;
-    border-left: 1px solid white;
+    float: left;
+    border-right: 1px solid white;
 }
 
 .navigation li a{
@@ -122,3 +122,9 @@
     float: right;
     margin-right: 10px;
 }
+
+.flash{
+    background: red;
+    border 1px solid white;
+    font-size: 50px;
+ }
