@@ -15,8 +15,11 @@ def login():
         if email in models.users:
             loginuser = models.BucketListApp(email, password)
             if loginuser.login() == 'Logged in':
+                print ('Logged in user is')
                 print (models.logged_in)
                 user_bucketlists = bucketlistmodel.User(models.logged_in[0]).view_user_bucketlist(models.logged_in[0])
+                print ('Logged in user has these bucket lists')
+                print (user_bucketlists)
                 return render_template("bucketlists.html", user_bucketlists=user_bucketlists)
             else:
                 flash('Password Incorrect')
@@ -46,9 +49,10 @@ def logout():
     print (models.logged_in)
     return redirect(url_for('login'))#a redirect is best
 
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/bucketlists', methods=['GET', 'POST'])
 def home():
     user_bucketlists = bucketlistmodel.User(models.logged_in[0]).view_user_bucketlist(models.logged_in[0])
+    print ('Logged in user has these  bucketlists')
     print (user_bucketlists)
     return render_template("bucketlists.html", user_bucketlists=user_bucketlists)
 
@@ -60,3 +64,38 @@ def addBucketlist():
         print (create_bucket_list.create_user_bucketlist(name))
         return redirect(url_for('home'))
         #return render_template("bucketlists.html")
+
+@app.route('/bucketlists/<int:bucketlistID>/delete', methods=['POST', 'GET'])
+def deleteBucketlist(bucketlistID):
+    if request.method == 'POST':
+        name = request.form['name']
+        user_bucketlists = bucketlistmodel.User(models.logged_in[0]).delete_bucketlist(bucketlistmodel.current_user_bucketlists[bucketlistID])
+        return redirect(url_for('home'))
+
+@app.route('/bucketlists/<int:bucketlistID>', methods=['GET', 'POST'])
+def view_items_in_bucketlist(bucketlistID):
+    if request.method =='GET':
+        user_bucketlists = bucketlistmodel.User(models.logged_in[0]).view_user_bucketlist(models.logged_in[0])
+        print ('Logged in user has these  bucketlists')
+        print (user_bucketlists)
+        bucketlist = bucketlistmodel.current_user_bucketlists[bucketlistID]
+        print (bucketlistmodel.User(models.logged_in[0]))
+        items = bucketlistmodel.User(models.logged_in[0]).view_items_in_bucketlist(bucketlist)
+        if not items:
+            return render_template("bucketlists.html", items=items, user_bucketlists=user_bucketlists)
+            #return redirect(url_for('home', items = []))
+        else:
+            print ("items in bucketlist are: ")
+            print (items)
+            return render_template("bucketlists.html", items = items)
+            #return redirect(url_for('home', items = items))
+    elif request.method == 'POST':
+        bucketlist = bucketlistmodel.current_user_bucketlists[bucketlistID]
+        activity = request.form['activity']
+        deadline = request.form['deadline']
+        status = request.form['status']
+        details = [status, deadline]
+        print ("details are ")
+        print (details)
+        print(bucketlistmodel.User(models.logged_in[0]).add_item_to_bucketlist(bucketlist, activity, details))
+        return redirect(url_for('home'))
