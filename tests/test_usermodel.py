@@ -1,22 +1,13 @@
 import unittest
 import context
 from app.models import BucketListApp
-#users = {'xr': ['X', '1920', 'asd']} this is the user dictionary so far.
+# users = {'xr': ['X', '1920', 'asd']} The user dictionary is initialized with this value
 
 class UserModelTest(unittest.TestCase):
 
-    def test_bucketListApp_Instance(self):
+    def test_bucketListApp_Instance(self): #this test ensures that the object is always properly initialized
         user = BucketListApp('lornatumuhairwe@gmail.com', 'abc', 'sd')
         self.assertIsInstance(user, BucketListApp, msg='object missing parameters')
-
-    def test_login_method_exists(self):
-        self.assertTrue(hasattr(BucketListApp, 'login'))
-
-    def test_signup_method_exists(self):
-        self.assertTrue(hasattr(BucketListApp, 'signup'))
-
-    def test_logout_method_exists(self):
-        self.assertTrue(hasattr(BucketListApp, 'logout'))
 
     def test_signup_user_added_to_user_dictionary(self):#user dictionary exists in app.models file
         user = BucketListApp('lornatumuhairwe@gmail.com', 'abc', 'Lorna', '1900', 'abc')
