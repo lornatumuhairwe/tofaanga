@@ -77,10 +77,9 @@ def view_items_in_bucketlist(bucketlistID):
         items = bucketlistmodel.User(models.logged_in[0]).view_items_in_bucketlist(bucketlist)
         if not items:
             return render_template("bucketlists.html", items=items, user_bucketlists=user_bucketlists)
-            #return redirect(url_for('home', items = []))
+            # return redirect(url_for('home', items = []))
         else:
-            return render_template("bucketlists.html", items = items)
-            #return redirect(url_for('home', items = items))
+            return render_template("bucketlists.html", items=items)
     elif request.method == 'POST':
         bucketlist = bucketlistmodel.current_user_bucketlists[bucketlistID]
         activity = request.form['activity']

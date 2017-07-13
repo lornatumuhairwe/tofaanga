@@ -14,7 +14,6 @@
     <ul class="navigation">
         <li style="float:right; border-left: 1px solid white;"><a href="/logout">Logout</a></li>
          <li><a href="/bucketlists">TOFAANGA</a></li>
-        <li><a href="#">Achievements</a></li>
     </ul>
     <div class="row bucketlistarea">
         <div class="col-md-4">
@@ -100,25 +99,16 @@
                     </thead>
                         {% if items %}
                     <tbody>
-
+                        {% for item in items %}
                     <tr>
 
-                        <td>{{items[0]}}</td>
-                        <td><a href="#">{{items[1][0]}}</a></td>
-                        <td>{{items[1][1]}}</td>
-                            <!--<form method="POST" action="">-->
-                                <!--<input type="hidden" name="lab" value="">-->
-                                <!--<button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-pencil"></i></button>-->
-                            <!--</form>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<form method="POST" action="" onsubmit="return confirm('Are you sure you want to delete?')">-->
-                                <!--<input type="hidden" name="lab" value="">-->
-                                <!--<button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>-->
-                            <!--</form></td>-->
+                        <td>{{item[0]}}</td>
+                        <td><a href="#">{{item[1][0]}}</a></td>
+                        <td>{{item[1][1]}}</td>
                     </tr>
+                        {% endfor %}
                     {% else %}
-                    <tr><a href="#">You have no bucketlists yet.</a></tr>
+                    <tr><a href="#">You have no items in the bucketlist yet.</a></tr>
                     </tbody>
                     {% endif %}
                 </table>
