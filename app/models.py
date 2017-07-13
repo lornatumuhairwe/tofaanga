@@ -8,9 +8,6 @@ class BucketListApp(object):
         self.dob = dob
         self.password = password
         self.cpassword = cpassword
-        #self.users = {}
-        #self.users = {'xr': ['X', '1992', 'asd']}
-        #self.logged_in = []
 
     def signup(self):
         if self.email and self.password:
@@ -29,7 +26,6 @@ class BucketListApp(object):
         if self.email in users:
             if self.password == users[self.email][2]:
                 logged_in[0] = self.email
-                #print (logged_in)
                 return 'Logged in'
             else:
                 return 'Incorrect password'
