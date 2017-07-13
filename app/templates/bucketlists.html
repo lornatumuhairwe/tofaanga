@@ -13,17 +13,23 @@
 <div class="body">
     <ul class="navigation">
         <li style="float:right; border-left: 1px solid white;"><a href="/logout">Logout</a></li>
-         <li><a href="#">TOFAANGA</a></li>
+         <li><a href="/bucketlists">TOFAANGA</a></li>
         <li><a href="#">Achievements</a></li>
     </ul>
     <div class="row bucketlistarea">
-
         <div class="col-md-4">
             <div class="bucklists">
                 <h2>Bucket Lists</h2>
                 <ul>
                     {% for bucketlist in user_bucketlists %}
-                    <li><a href="#">{{bucketlist}}</a></li>
+                     <tr>
+                        <td><li><a href="/bucketlists/{{user_bucketlists.index(bucketlist)}}">{{bucketlist}}</a></li></td>
+                        <td>
+                            <form method="POST" action="/bucketlists/{{user_bucketlists.index(bucketlist)}}/delete" onsubmit="return confirm('Are you sure you want to delete?')">
+                                <input type="hidden" name="name" value="name">
+                                <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                            </form></td>
+                         </tr>
                     {% else %}
                     <li><a href="#">You have no bucketlists yet.</a></li>
                     {% endfor %}
@@ -64,7 +70,7 @@
                           <h4 class="modal-title">Add item</h4>
                         </div>
                         <div class="modal-body">
-                          <form role="form" action="#" method="POST">
+                          <form role="form" action="" method="POST">
                             <div class="input-group">
                               <span class="input-group-addon">Activity</span>
                               <input type="text" class="form-control" name="activity" required>
@@ -72,6 +78,10 @@
                             <div class="input-group">
                               <span class="input-group-addon">Deadline</span>
                               <input type="date" class="form-control" name="deadline" required>
+                            </div><br>
+                              <div class="input-group">
+                              <span class="input-group-addon">Status</span>
+                              <input type="text" class="form-control" name="status" required>
                             </div><br>
                             <button class="btn btn-sm btn-primary" type="submit">Add</button>
                         </form>
@@ -83,29 +93,34 @@
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
-                        <th>Status</th>
                         <th>Title</th>
+                        <th>Status</th>
                         <th>Due date</th>
                     </tr>
                     </thead>
+                        {% if items %}
                     <tbody>
+
                     <tr>
-                        <td>Checkbox</td>
-                        <td><a href="#">Scooba diving</a></td>
-                        <td>13th Nov 2018</td>
-                        <td>
-                            <form method="POST" action="">
-                                <input type="hidden" name="lab" value="">
-                                <button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-pencil"></i></button>
-                            </form>
-                        </td>
-                        <td>
-                            <form method="POST" action="" onsubmit="return confirm('Are you sure you want to delete?')">
-                                <input type="hidden" name="lab" value="">
-                                <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
-                            </form></td>
+
+                        <td>{{items[0]}}</td>
+                        <td><a href="#">{{items[1][0]}}</a></td>
+                        <td>{{items[1][1]}}</td>
+                            <!--<form method="POST" action="">-->
+                                <!--<input type="hidden" name="lab" value="">-->
+                                <!--<button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-pencil"></i></button>-->
+                            <!--</form>-->
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--<form method="POST" action="" onsubmit="return confirm('Are you sure you want to delete?')">-->
+                                <!--<input type="hidden" name="lab" value="">-->
+                                <!--<button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>-->
+                            <!--</form></td>-->
                     </tr>
+                    {% else %}
+                    <tr><a href="#">You have no bucketlists yet.</a></tr>
                     </tbody>
+                    {% endif %}
                 </table>
             </div>
 
