@@ -37,9 +37,23 @@ class User(object):
 
     def delete_bucketlist(self, name):
         """Implements delete feature"""
-        if name: # makes sure the name fielf is not empty and
+        if name: # makes sure the name field is not empty and
             del bucketlists[models.logged_in[0]][name]
             return bucketlists
+
+    def update_bucketlist(self, name, new_name):
+        """Implements the update bucketlist feature"""
+        if name and new_name: # makes sure the name field is not empty and
+            bucketlists[models.logged_in[0]][new_name] = bucketlists[models.logged_in[0]].pop(name)
+            # del bucketlists[models.logged_in[0]][name]
+            return bucketlists
+
+    # dictionary[new_key] = dictionary[old_key]
+    # del dictionary[old_key]
+    # Or in 1
+    # step:
+    #
+    # dictionary[new_key] = dictionary.pop(old_key)
 
     def add_item_to_bucketlist(self, bucketlist, title, details):
         """Implements add item to bucketlist feature"""

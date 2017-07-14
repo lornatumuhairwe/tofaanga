@@ -77,6 +77,21 @@ def deleteBucketlist(bucketlistID):
     else:
         return redirect(url_for('login'))
 
+
+@app.route('/bucketlists/<int:bucketlistID>/update', methods=['POST', 'GET'])
+def updateBucketlist(bucketlistID):
+    """method implementing delete bucketlist feature"""
+    if models.logged_in[0]:
+        if request.method == 'POST':
+            new_name = request.form['new_name']
+            user_bucketlists = bucketlistmodel.User(models.logged_in[0]).update_bucketlist(bucketlistmodel.current_user_bucketlists[bucketlistID], new_name)
+            return redirect(url_for('home'))
+        elif request.method == 'GET':
+            return render_template('editbucketlist.html')
+    else:
+        return redirect(url_for('login'))
+
+
 @app.route('/bucketlists/<int:bucketlistID>', methods=['GET', 'POST'])
 def view_items_in_bucketlist(bucketlistID):
     """method implementing  feature"""
@@ -89,7 +104,7 @@ def view_items_in_bucketlist(bucketlistID):
                 return render_template("bucketlists.html", items=items, user_bucketlists=user_bucketlists)
                 # return redirect(url_for('home', items = []))
             else:
-                return render_template("bucketlists.html", items=items)
+                return render_template("bucketlists.html", items=items, user_bucketlists=user_bucketlists)
         elif request.method == 'POST':
             bucketlist = bucketlistmodel.current_user_bucketlists[bucketlistID]
             activity = request.form['activity']
