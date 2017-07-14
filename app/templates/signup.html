@@ -22,11 +22,11 @@
             <div class="signupbox">
                 <div class="title"><strong>Sign up</strong></div>
                 <form action="{{url_for('signup')}}" method=post>
-                    <input type="text" name="name" placeholder="Full name"><br>
-                    <input type="email" name="email" placeholder="Email"><br>
-                    <input type="date" name="dob" placeholder="Date of Birth"><br>
-                    <input type="password" name="password" placeholder="Password"><br>
-                    <input type="password" name="cpassword" placeholder="Confirm password"><br>
+                    <input type="text" name="name" placeholder="Full name" required><br>
+                    <input type="email" name="email" placeholder="Email" required><br>
+                    <input type="date" name="dob" placeholder="Date of Birth" required><br>
+                    <input type="password" name="password" placeholder="Password" required><br>
+                    <input type="password" name="cpassword" placeholder="Confirm password" required><br>
                     <input type="submit" value="Sign up">
                 </form>
             </div>
