@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css')}} ">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css')}} ">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</head>
+<body>
+<div class="body">
+    <form role="form" action="" method="POST">
+        <div class="input-group">
+          <span class="input-group-addon">New Name</span>
+          <input type="text" class="form-control" name="new_name" required>
+        </div><br>
+        <button class="btn btn-sm btn-primary" type="submit">Update</button>
+    </form>
+</div>
+</body>
+</html>

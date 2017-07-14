@@ -28,6 +28,11 @@
                                 <input type="hidden" name="name" value="name" required>
                                 <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
                             </form></td>
+                         <td>
+                            <form method="GET" action="/bucketlists/{{user_bucketlists.index(bucketlist)}}/update">
+                                <!--<input type="hidden" name="name" value="newname" required>-->
+                                <button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-edit"></i></button>
+                            </form></td>
                          </tr>
                     {% else %}
                     <li><a href="#">You have no bucketlists yet.</a></li>
@@ -79,9 +84,15 @@
                               <input type="date" class="form-control" name="deadline" required>
                             </div><br>
                               <div class="input-group">
-                              <span class="input-group-addon">Status</span>
-                              <input type="text" class="form-control" name="status" required>
-                            </div><br>
+                                  <span class="input-group-addon">Role</span>
+                                  <select name="status" class="form-control" required>
+                                      <option></option>
+                                      <option value="complete">Complete</option>
+                                      <option value="in progress">In progress</option>
+                                      <option value="incomplete">Incomplete</option>
+                                      <option value="dreaming">Dreaming</option>
+                                  </select>
+                              </div><br>
                             <button class="btn btn-sm btn-primary" type="submit">Add</button>
                         </form>
                         </div>
@@ -105,6 +116,16 @@
                         <td>{{item[0]}}</td>
                         <td><a href="#">{{item[1][0]}}</a></td>
                         <td>{{item[1][1]}}</td>
+                        <td>
+                            <form method="POST" action="#" >
+                                <input type="hidden" name="name" value="newname" required>
+                                <button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-edit"></i></button>
+                            </form></td>
+                        <td>
+                            <form method="POST" action="#" onsubmit="return confirm('Are you sure you want to delete?')">
+                                <input type="hidden" name="name" value="name" required>
+                                <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                            </form></td>
                     </tr>
                         {% endfor %}
                     {% else %}
