@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css')}} ">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css')}} ">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</head>
+<body>
+    <ul class="navigation">
+        <li style="float:right; border-left: 1px solid white;"><a href="/">Login</a></li>
+         <li><a href="#"><strong>TOFAANGA</strong></a></li>
+    </ul>
+    <div class="signupbackground">
+        <div class="overlay">
+            {% for message in get_flashed_messages() %}
+                <div class="flash">{{ message }}</div>
+            {% endfor %}
+            <div class="signupbox">
+                <div class="title"><strong>Sign up</strong></div>
+                <form action="{{url_for('signup')}}" method=post>
+                    <input type="text" name="name" placeholder="Full name"><br>
+                    <input type="email" name="email" placeholder="Email"><br>
+                    <input type="date" name="dob" placeholder="Date of Birth"><br>
+                    <input type="password" name="password" placeholder="Password"><br>
+                    <input type="password" name="cpassword" placeholder="Confirm password"><br>
+                    <input type="submit" value="Sign up">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
