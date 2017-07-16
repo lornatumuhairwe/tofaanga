@@ -44,22 +44,13 @@ class User(object):
     def update_bucketlist(self, name, new_name):
         """Implements the update bucketlist feature"""
         if name and new_name: # makes sure the name field is not empty and
-            bucketlists[models.logged_in[0]][new_name] = bucketlists[models.logged_in[0]].pop(name)
-            # del bucketlists[models.logged_in[0]][name]
+            bucketlists[models.logged_in[0]][new_name] = bucketlists[models.logged_in[0]].pop(name) #updating a dict key
             return bucketlists
-
-    # dictionary[new_key] = dictionary[old_key]
-    # del dictionary[old_key]
-    # Or in 1
-    # step:
-    #
-    # dictionary[new_key] = dictionary.pop(old_key)
 
     def add_item_to_bucketlist(self, bucketlist, title, details):
         """Implements add item to bucketlist feature"""
         bucketlists[models.logged_in[0]][bucketlist][title] = details # creates dictionary with title of activity as key
         return bucketlists                                             # and details of activity as values
-
 
     def view_items_in_bucketlist(self, bucketlist):
         """Implements view items in bucketlist feature"""
@@ -72,3 +63,16 @@ class User(object):
             return all_items
         else:
             return None
+
+    def edit_item_in_bucketlist(self, bucketlist, old_activity, new_activity, details):
+        """Implements edit items in bucketlist feature"""
+        if new_activity and old_activity:
+            bucketlists[models.logged_in[0]][bucketlist][new_activity] = details
+            del bucketlists[models.logged_in[0]][bucketlist][old_activity]
+            self.view_items_in_bucketlist(bucketlist)
+
+    def delete_item_in_bucketlist(self, bucketlist, activity):
+        """Implements delete items in bucketlist feature"""
+        if bucketlist and activity:
+            del bucketlists[models.logged_in[0]][bucketlist][activity]
+            self.view_items_in_bucketlist(bucketlist)
