@@ -75,6 +75,7 @@
                         </div>
                         <div class="modal-body">
                           <form role="form" action="" method="POST">
+                              <input type="hidden" name="action" value="addItem" required>
                             <div class="input-group">
                               <span class="input-group-addon">Activity</span>
                               <input type="text" class="form-control" name="activity" required>
@@ -84,13 +85,13 @@
                               <input type="date" class="form-control" name="deadline" required>
                             </div><br>
                               <div class="input-group">
-                                  <span class="input-group-addon">Role</span>
+                                  <span class="input-group-addon">Status</span>
                                   <select name="status" class="form-control" required>
                                       <option></option>
-                                      <option value="complete">Complete</option>
-                                      <option value="in progress">In progress</option>
-                                      <option value="incomplete">Incomplete</option>
-                                      <option value="dreaming">Dreaming</option>
+                                      <option value="Complete">Complete</option>
+                                      <option value="In progress">In progress</option>
+                                      <option value="Incomplete">Incomplete</option>
+                                      <option value="Dreaming">Dreaming</option>
                                   </select>
                               </div><br>
                             <button class="btn btn-sm btn-primary" type="submit">Add</button>
@@ -117,13 +118,50 @@
                         <td><a href="#">{{item[1][0]}}</a></td>
                         <td>{{item[1][1]}}</td>
                         <td>
-                            <form method="POST" action="#" >
-                                <input type="hidden" name="name" value="newname" required>
-                                <button type="submit" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-edit"></i></button>
-                            </form></td>
+                            <button type="submit" class="btn btn-xs btn-success" data-toggle="modal" data-target="#editItems"><i class="glyphicon glyphicon-edit"></i></button>
+                            <div class="modal fade" id="editItems" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">update item</h4>
+                        </div>
+                        <div class="modal-body">
+                          <form role="form" action="" method="POST">
+                              <input type="hidden" name="action" value="updateItem" required>
+                            <div class="input-group">
+                              <span class="input-group-addon">Activity</span>
+                              <input type="text" class="form-control" name="activity" value="{{item[0]}}" required>
+                            </div><br>
+                          <div class="input-group">
+                              <span class="input-group-addon">New activity name</span>
+                              <input type="text" class="form-control" name="new_activity" value="" required>
+                            </div><br>
+                            <div class="input-group">
+                              <span class="input-group-addon">Deadline</span>
+                              <input type="date" class="form-control" name="deadline" value="{{item[1][0]}}" required>
+                            </div><br>
+                              <div class="input-group">
+                                  <span class="input-group-addon">Status</span>
+                                  <select name="status" class="form-control" required value="{{item[1][1]}}">
+                                      <option></option>
+                                      <option value="complete">Complete</option>
+                                      <option value="in progress">In progress</option>
+                                      <option value="incomplete">Incomplete</option>
+                                      <option value="dreaming">Dreaming</option>
+                                  </select>
+                              </div><br>
+                            <button class="btn btn-sm btn-primary" type="submit">Update</button>
+                        </form>
+                        </div>
+                      </div>
+
+                    </div>
+                </div>
                         <td>
-                            <form method="POST" action="#" onsubmit="return confirm('Are you sure you want to delete?')">
-                                <input type="hidden" name="name" value="name" required>
+                            <form method="POST" action="" onsubmit="return confirm('Are you sure you want to delete?')">
+                                <input type="hidden" name="action" value="deleteItem" required>
+                                <input type="hidden" name="activity" value="{{item[0]}}" required>
                                 <button type="submit" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
                             </form></td>
                     </tr>
