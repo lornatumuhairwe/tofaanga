@@ -31,7 +31,7 @@ class User(object):
         else:
             bucketlists[email] = {}
             current_user_bucketlists = user_bucketlists
-            global current_user_bucketlists
+            #global current_user_bucketlists
             current_user_bucketlists = user_bucketlists
             return user_bucketlists
 
