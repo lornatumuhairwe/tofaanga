@@ -47,6 +47,7 @@ def logout():
 
 @app.route('/bucketlists', methods=['GET', 'POST'])
 def home():
+    """method implementing view bucketlists feature"""
     if models.logged_in[0]:
         user_bucketlists = bucketlistmodel.User(models.logged_in[0]).view_user_bucketlist(models.logged_in[0])
         # user_bucketlists returns the bucketlist of the logged in user
@@ -80,7 +81,7 @@ def deleteBucketlist(bucketlistID):
 
 @app.route('/bucketlists/<int:bucketlistID>/update', methods=['POST', 'GET'])
 def updateBucketlist(bucketlistID):
-    """method implementing delete bucketlist feature"""
+    """method implementing update bucketlist feature"""
     if models.logged_in[0]:
         if request.method == 'POST':
             new_name = request.form['new_name']
@@ -94,7 +95,7 @@ def updateBucketlist(bucketlistID):
 
 @app.route('/bucketlists/<int:bucketlistID>', methods=['GET', 'POST'])
 def view_items_in_bucketlist(bucketlistID):
-    """method implementing  feature"""
+    """method implementing add item to bucketlist feature"""
     if models.logged_in[0]:
         if request.method =='GET':
             user_bucketlists = bucketlistmodel.User(models.logged_in[0]).view_user_bucketlist(models.logged_in[0])
@@ -106,13 +107,43 @@ def view_items_in_bucketlist(bucketlistID):
             else:
                 return render_template("bucketlists.html", items=items, user_bucketlists=user_bucketlists)
         elif request.method == 'POST':
-            bucketlist = bucketlistmodel.current_user_bucketlists[bucketlistID]
-            activity = request.form['activity']
-            deadline = request.form['deadline']
-            status = request.form['status']
-            details = [status, deadline]
-            bucketlistmodel.User(models.logged_in[0]).add_item_to_bucketlist(bucketlist, activity, details)
-            #adds activity/items to specified bucketlist of current user
+            action = request.form['action']
+            print ('--------')
+            print (action)
+            if action == 'addItem':
+                bucketlist = bucketlistmodel.current_user_bucketlists[bucketlistID]
+                activity = request.form['activity']
+                deadline = request.form['deadline']
+                status = request.form['status']
+                details = [status, deadline]
+                # adds activity/items to specified bucketlist of current user
+                bucketlistmodel.User(models.logged_in[0]).add_item_to_bucketlist(bucketlist, activity, details)
+            elif action == 'updateItem':
+                bucketlist = bucketlistmodel.current_user_bucketlists[bucketlistID]
+                activity = request.form['activity']
+                deadline = request.form['deadline']
+                status = request.form['status']
+                details = [status, deadline]
+                new_activity = request.form['new_activity']
+                bucketlistmodel.User(models.logged_in[0]).edit_item_in_bucketlist(bucketlist, activity, new_activity, details)
+            elif action == 'deleteItem':
+                bucketlist = bucketlistmodel.current_user_bucketlists[bucketlistID]
+                activity = request.form['activity']
+                bucketlistmodel.User(models.logged_in[0]).delete_item_in_bucketlist(bucketlist, activity)
+
             return redirect(url_for('home'))
+    else:
+        return redirect(url_for('login'))
+
+@app.route('/bucketlists/<int:bucketlistID>/updateItem', methods=['POST', 'GET'])
+def updateBucketlistItem(bucketlistID):
+    """method implementing delete bucketlist feature"""
+    if models.logged_in[0]:
+        if request.method == 'POST':
+            new_name = request.form['new_name']
+            user_bucketlists = bucketlistmodel.User(models.logged_in[0]).update_bucketlist(bucketlistmodel.current_user_bucketlists[bucketlistID], new_name)
+            return redirect(url_for('home'))
+        elif request.method == 'GET':
+            return render_template('edititem.html')
     else:
         return redirect(url_for('login'))
