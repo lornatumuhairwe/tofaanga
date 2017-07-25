@@ -1,5 +1,5 @@
 from app import models
-bucketlists = {} # dictionary stores all the bucketlists and items for the signed users.
+bucketlists = {'lornatumuhairwe@gmail.com': {'Premier League': {'ManU':['13/11/1994', 'incomplete']}}} # dictionary stores all the bucketlists and items for the signed users.
 current_user_bucketlists = [] # list that holds the current users bucketlists
 
 class User(object):
@@ -11,7 +11,9 @@ class User(object):
         """Implements create user bucketlist feature"""
         if name and name not in bucketlists:
                 if self.email in bucketlists:
-                    bucketlists[self.email][name] = {} # creates empty dictionary in bucketlists with bucketlist name as key
+                    if name not in bucketlists[self.email]:
+                        bucketlists[self.email][name] = {} # creates empty dictionary in bucketlists with bucketlist name as key
+                    else: return False
                 else:
                     bucketlists[self.email] = {} # creates empty dictionary in bucketlists dictionary with current user as key
                     bucketlists[self.email][name] = {} # creates empty dictionary in current user dictionary with bucketlist name as key
@@ -40,6 +42,8 @@ class User(object):
         if name: # makes sure the name field is not empty and
             del bucketlists[models.logged_in[0]][name]
             return bucketlists
+        else:
+            return 'Cannot delete a buckelist with no name'
 
     def update_bucketlist(self, name, new_name):
         """Implements the update bucketlist feature"""
